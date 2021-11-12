@@ -5,8 +5,10 @@ import VideoList from './VideoList';
 import VideoDetail from './VideoDetail'
 
 
-class App extends React.Component {www
-    state = { videos: [], selectedVideo: null };
+class App extends React.Component {
+    state = { videos: [], 
+        selectedVideo: null 
+    };
 
     onTermSubmit = async (term) => {
         const response = await youtube.get('/search' , {
@@ -14,10 +16,10 @@ class App extends React.Component {www
                 q: term
             }
         });
-
+// Is reponse something that is recognized, could it be anything? Where do data and items come from? 
         this.setState({ videos: response.data.items });
     };
-
+    // Why is video passed before the arrow function? 
     onVideoSelect = (video => {
         this.setState({ selectedVideo: video })
     });
@@ -27,7 +29,10 @@ class App extends React.Component {www
             <div className="ui container">
                 <SearchBar onFormSubmit={this.onTermSubmit}/>
                 <VideoDetail video={this.state.selectedVideo} />
-                <VideoList  onVideoSelect={this.onVideoSelect} videos={this.state.videos} />
+                <VideoList  
+                onVideoSelect={this.onVideoSelect} 
+                videos={this.state.videos} 
+                />
             </div>
         );
     }
